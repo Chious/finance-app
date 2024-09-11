@@ -1,7 +1,7 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, ComponentProps } from "react";
 
-type ButtonProps = {
-  children: React.ReactNode;
+export type ButtonProps = ComponentProps<"button"> & {
+  className?: string;
   props?: PropsWithChildren;
 };
 

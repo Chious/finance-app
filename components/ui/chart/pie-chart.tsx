@@ -13,7 +13,10 @@ function PieChart() {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const ctx = chartRef.current.getContext("2d");
+    if (!chartRef.current) return;
+    const ctx = (chartRef.current as HTMLCanvasElement)?.getContext("2d");
+
+    if (!ctx) return;
     const chart = new Chart(ctx, {
       type: "doughnut",
       data: {
@@ -43,7 +46,7 @@ function PieChart() {
     return () => {
       chart.destroy();
     };
-  }, [data]);
+  }, []);
 
   return (
     <div className="w-64 h-64 relative">

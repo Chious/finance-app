@@ -1,5 +1,5 @@
 import React from "react";
-import RecurringIcon from "@/images/icon-recurring-bills.svg";
+import RecurringIcon from "@/public/images/icon-recurring-bills.svg";
 import Table from "@/components/ui/table/table";
 
 export default function Page() {

@@ -1,5 +1,6 @@
 import PieChart from "@/components/ui/chart/pie-chart";
 import Table from "@/components/ui/table/table";
+import Link from "next/link";
 import React from "react";
 
 export default function Page() {
@@ -24,27 +25,35 @@ export default function Page() {
         <div className="bg-white p-4 lg:col-span-2 lg:row-span-2 rounded-md">
           <div className="flex justify-between">
             <h3>Savings Pots</h3>
-            <h4>See Details</h4>
+            <Link href="/pots">
+              <h4>See Details</h4>
+            </Link>
           </div>
         </div>
         <div className="bg-white p-4 lg:row-span-3 rounded-md">
           <div className="flex justify-between">
             <h3>Budgets</h3>
-            <h4>See Details</h4>
+            <Link href="/budgets">
+              <h4>See Details</h4>
+            </Link>
           </div>
           <PieChart />
         </div>
-        <div className="bg-white p-4 lg:col-span-2 lg:row-span-3 rounded-md">
+        <div className="bg-white p-4 lg:col-span-2 lg:row-span-3 rounded-md overflow-scroll">
           <div className="flex justify-between">
             <h3>Transactions</h3>
-            <h4>See Details</h4>
+            <Link href="/transactions">
+              <h4>See Details</h4>
+            </Link>
           </div>
           <Table />
         </div>
         <div className="bg-white p-4 rounded-md lg:row-span-2">
           <div className="flex justify-between">
             <h3>Recurring Bills</h3>
-            <h4>See Details</h4>
+            <Link href="/recurring-bills">
+              <h4>See Details</h4>
+            </Link>
           </div>
         </div>
       </section>

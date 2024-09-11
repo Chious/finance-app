@@ -11,12 +11,9 @@ export default function Page() {
         </button>
       </div>
       <section className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <PotCard />
-        <PotCard />
-        <PotCard />
-        <PotCard />
-        <PotCard />
-        <PotCard />
+        {[1, 2, 3, 4, 5, 6].map((_, index) => (
+          <PotCard key={index} />
+        ))}
       </section>
     </div>
   );

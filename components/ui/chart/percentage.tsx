@@ -9,7 +9,7 @@ export default function Percentage({ total = 100, spent = 50, height = 50 }) {
       style={{ height: `${height}px` }}
     >
       <div
-        className={`relative w-[20%] h-full bg-gray-400 z-10 rounded-md duration-100`}
+        className={`relative w-[${percentage}%] h-full bg-gray-400 z-10 rounded-md duration-100`}
       />
     </div>
   );

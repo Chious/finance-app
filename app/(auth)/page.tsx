@@ -1,5 +1,5 @@
 import Form from "@/components/ui/form/form";
-import BackgroundImage from "@/images/illustration-authentication.svg";
+import BackgroundImage from "@/public/images/illustration-authentication.svg";
 
 export default function Home() {
   return (

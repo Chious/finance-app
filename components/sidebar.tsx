@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import BuggetIcon from "@/images/icon-nav-budgets.svg";
-import OverviewIcon from "@/images/icon-nav-overview.svg";
-import PotIcon from "@/images/icon-nav-pots.svg";
-import RecurringIcon from "@/images/icon-nav-recurring-bills.svg";
-import TransactionIcon from "@/images/icon-nav-transactions.svg";
-import LogoL from "@/images/logo-large.svg";
-import LogoS from "@/images/logo-small.svg";
+import BuggetIcon from "@/public/images/icon-nav-budgets.svg";
+import OverviewIcon from "@/public/images/icon-nav-overview.svg";
+import PotIcon from "@/public/images/icon-nav-pots.svg";
+import RecurringIcon from "@/public/images/icon-nav-recurring-bills.svg";
+import TransactionIcon from "@/public/images/icon-nav-transactions.svg";
+import LogoL from "@/public/images/logo-large.svg";
+import LogoS from "@/public/images/logo-small.svg";
 
 const options = [
   {
@@ -44,40 +44,61 @@ const options = [
     href: "/recurring-bills",
   },
 ];
-export default function Sidebar() {
+
+type SidebarProps = {
+  children: React.ReactNode;
+};
+
+export default function Sidebar({ children }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
-    <nav
-      className={`bg-black text-white pb-8 p-4 flex flex-col gap-8 rounded-r-lg transition-all duration-300 ease-in-out ${
-        isOpen ? "w-64" : "w-20"
-      }`}
-    >
-      {isOpen ? <LogoL className="ml-2" /> : <LogoS className="ml-2" />}
-      <div className="btn-group flex flex-col gap-3 flex-1 whitespace-nowrap">
+    <div className="w-full h-full flex">
+      <nav
+        className={`bg-black text-white pb-8 p-4 flex-col gap-8 rounded-r-lg transition-all duration-300 ease-in-out hidden lg:visible lg:flex ${
+          isOpen ? "w-64" : "w-20"
+        }`}
+      >
+        {isOpen ? <LogoL className="ml-2" /> : <LogoS className="ml-2" />}
+        <div className="btn-group flex flex-col gap-3 flex-1 whitespace-nowrap">
+          {options.map((option) => (
+            <Link
+              key={option.name}
+              href={option.href}
+              className={`rounded-r-md flex gap-2 items-center p-2 h-12 ${pathname === option.href ? "bg-white text-black -ml-4 border-l-4 border-green" : ""}`}
+            >
+              {pathname === option.href ? option.icon : option.iconNotActive}
+              <span className={!isOpen ? "hidden" : ""}>{option.name}</span>
+            </Link>
+          ))}
+        </div>
+        <button
+          className=" text-white p-2 rounded-md flex items-center gap-2"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          <BuggetIcon />
+          <p className={!isOpen ? "hidden" : ""}> Minize Menu</p>
+        </button>
+      </nav>
+      <div className="flex-1 p-4 overflow-scroll mb-20 lg:mb-0">{children}</div>
+      <footer className="z-50 fixed flex bottom-0 bg-black w-full p-2 rounded-t-xl items-center justify-between lg:hidden">
         {options.map((option) => (
           <Link
-            key={option.name}
             href={option.href}
-            className={`rounded-r-md flex gap-2 items-center p-2 h-12 ${pathname === option.href ? "bg-white text-black -ml-4 border-l-4 border-green" : ""}`}
+            key={option.name}
+            className={`flex flex-col items-center justify-center gap-1 p-2 flex-1
+              ${pathname === option.href ? "bg-white text-black rounded-t-xl border-b-2 border-green text-bold -mb-4 pb-6" : "text-gray-400"}
+              `}
           >
-            {pathname === option.href ? option.icon : option.iconNotActive}
-            <span className={!isOpen ? "hidden" : ""}>{option.name}</span>
+            {option.icon}
+            <h5 className=" hidden md:block lg:block">{option.name}</h5>
           </Link>
         ))}
-      </div>
-      <button
-        className=" text-white p-2 rounded-md flex items-center gap-2"
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
-        <BuggetIcon />
-        <p className={!isOpen ? "hidden" : ""}> Minize Menu</p>
-      </button>
-    </nav>
+      </footer>
+    </div>
   );
 }

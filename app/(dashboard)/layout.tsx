@@ -14,8 +14,7 @@ export default function Layout({
 }>) {
   return (
     <main className="flex w-full h-full bg-yellow/20">
-      <Sidebar />
-      <div className="w-full h-full p-4 overflow-scroll">{children}</div>
+      <Sidebar>{children}</Sidebar>
     </main>
   );
 }
